@@ -4,7 +4,7 @@ We will use this repository to share our code for our project for COMP550 Natura
 
 Important dates:
 
-* 2021-11-26: We meet briefly at 12pm to discuss the project.
+* 2021-12-08: We meet briefly at 10am to discuss the project.
 * 2021-12-20: Project due date.
 
 To do list:
@@ -15,13 +15,10 @@ To do list:
 1. First phase: Creating the basic ingredients.
    * Choose quantitative measures of linguistic structure, and implement them in Python.
      * Andressa will lead this.
-     * Aim to complete by 2021-11-25.
    * Find appropriate English corpora (or perhaps just one big corpus), and access them in Python.
      * Laurestine will lead this.
-     * Aim to complete by 2021-12-01.
    * Create a working prototype for an artificial language-learning setup in Python.
      * Hugo will lead this.
-     * Aim to complete by 2021-11-29.
 2. Second phase: Combining everything.
    * Choose which aspects of the language-learning setup to manipulate.
    * Measure these aspects on the corpora we have chosen.
