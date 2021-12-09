@@ -28,3 +28,9 @@ To do list:
      * Due December 20th.
      * 4.5-5 pages, not including references.
      * Follows ACL 2020 style guidelines.
+
+### Running
+
+Python 3.6+.
+
+To install all the dependencies, run `pip install -r requirements.txt`.
