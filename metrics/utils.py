@@ -17,9 +17,7 @@ def transform_corpus(corpus: List[str], vocabulary: List[str]):
     vectorizer.fit(vocabulary)
     matrix = vectorizer.transform(corpus)
 
-    print('features', vectorizer.get_feature_names_out())
-
-    return vectorizer.get_feature_names_out(), matrix.toarray()
+    return vectorizer.get_feature_names(), matrix.toarray()
 
 
 def compute_entropy(symbols: List[str]) -> float:
