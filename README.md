@@ -4,7 +4,6 @@ We will use this repository to share our code for our project for COMP550 Natura
 
 Important dates:
 
-* 2021-12-08: We meet briefly at 10am to discuss the project.
 * 2021-12-20: Project due date.
 
 To do list:
