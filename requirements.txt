@@ -1,0 +1,5 @@
+editdistance
+scipy
+numpy
+scikit-learn
+nltk
