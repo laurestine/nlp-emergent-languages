@@ -5,6 +5,7 @@ from scipy.spatial.distance import hamming
 from utils import transform_corpus
 from topographic_similarity import TopographicSimilarity
 from positional_disentanglement import PositionalDisentanglement
+from conflict_count import ConflictCount
 
 """
 Data
@@ -24,6 +25,10 @@ print("Count vector of A: \n {} \n".format(messages_A))
 _, messages_B = transform_corpus(input_B, vocabulary)
 print("Count vector of B: \n {} \n".format(messages_B))
 
+inputs = ['blue circle','blue ellipse','blue rectangle','blue square', 'blue triangle',
+'gold circle','gold ellipse','gold rectangle','gold square','gold triangle']
+representations = ['ac','fi','ca','bh','if','df','ba','fd','ji','ab']
+
 """
 TopSim
 """
@@ -40,4 +45,13 @@ Pos
 pos_class = PositionalDisentanglement(
     max_message_length=4, num_concept_slots=2)
 pos = pos_class.measure(compositional_representation_A, input_A)
-print("Pos: {}".format(pos))
+print("Pos: {} \n".format(pos))
+
+
+"""
+Conflict Count
+"""
+
+conf_count_class = ConflictCount(max_length=2)
+conf_count = conf_count_class.measure(representations, inputs)
+print("Conflict count: {}".format(conf_count))
