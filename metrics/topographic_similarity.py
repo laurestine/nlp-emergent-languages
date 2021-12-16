@@ -2,39 +2,31 @@ import numpy as np
 
 from typing import List, Callable
 
+from scipy.spatial.distance import pdist
 from scipy.stats import spearmanr
+
+from utils import transform_corpus
 
 """
 Adapted from
 https://github.com/tomekkorbak/measuring-non-trivial-compositionality
+https://github.com/facebookresearch/EGG/blob/2d2ec2a19fa20502494e2b49ba8d8d2fd4036734/egg/core/language_analysis.py#L124
 """
 
 
 class TopographicSimilarity():
-
-    def __init__(self, message_metric: Callable, representation_metric: Callable):
+    def __init__(self, message_metric: Callable, meaning_metric: Callable):
         self.message_metric = message_metric
-        self.representation_metric = representation_metric
+        self.meaning_metric = meaning_metric
 
-    def measure(self, compositional_representation_A, messages_A, compositional_representation_B, messages_B):
-        distance_messages = self._compute_distances(
-            sequence_A=messages_A,
-            sequence_B=messages_B,
-            metric=self.message_metric)
+    def measure(self, meanings: List[str], messages: List[str]) -> float:
+        mean = [[ord(c) for c in w] for w in meanings]
+        mess = transform_corpus(messages)
 
-        distance_representation = self._compute_distances(
-            sequence_A=compositional_representation_A,
-            sequence_B=compositional_representation_B,
-            metric=self.representation_metric)
+        distance_messages = pdist(mess,self.message_metric)
+        distance_meaning = pdist(mean,self.meaning_metric)
 
-        topsim = spearmanr(distance_representation,
+        topsim = spearmanr(distance_meaning,
                            distance_messages, nan_policy="raise").correlation
 
         return topsim
-
-    def _compute_distances(self, sequence_A: List[str], sequence_B: List[str], metric: Callable) -> List[float]:
-        distances = []
-        for element_1 in sequence_A:
-            for element_2 in sequence_B:
-                distances.append(metric(element_1, element_2))
-        return distances

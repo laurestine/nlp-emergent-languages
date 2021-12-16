@@ -6,7 +6,15 @@ from typing import List
 import nltk
 from nltk.tokenize import word_tokenize
 
-nltk.download('punkt')
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
+"""
+Adapted from
+https://github.com/tomekkorbak/measuring-non-trivial-compositionality/blob/master/metrics/conflict_count.py
+"""
 
 class ConflictCount():
     def __init__(self, max_length: int):
