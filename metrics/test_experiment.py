@@ -108,11 +108,13 @@ TopSim
 
 topsim_class = TopographicSimilarity(message_metric=hamming,
                                      meaning_metric=editdistance.eval)
-topsim_neg = topsim_class.measure(negative_sentence_meaning, negative_sentence_input)
+negative_sentence_meaning_ = [[ord(c) for c in w] for w in negative_sentence_meaning]
+topsim_neg = topsim_class.measure(negative_sentence_meaning_, negative_sentence_input)
 
 print("Topsim - negation : {} \n".format(topsim_neg)) # 0.9770084209183943
 
-topsim_rot = topsim_class.measure(rotation_sentence_meaning, rotation_sentence_input)
+rotation_sentence_meaning_ = [[ord(c) for c in w] for w in rotation_sentence_meaning]
+topsim_rot = topsim_class.measure(rotation_sentence_meaning_, rotation_sentence_input)
 print("Topsim - rotation : {} \n".format(topsim_rot)) # -0.06640517470966958
 
 

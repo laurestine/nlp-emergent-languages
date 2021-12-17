@@ -7,9 +7,14 @@ from collections import defaultdict
 from typing import List
 
 
-def transform_corpus(corpus: List[str]):
+def transform_corpus(corpus: List[str], vocabulary: List[str] = []):
     vectorizer = CountVectorizer()
-    matrix = vectorizer.fit_transform(corpus)
+    if not vocabulary:
+        matrix = vectorizer.fit_transform(corpus)
+    else:
+        vectorizer.fit(vocabulary)
+        matrix = vectorizer.transform(corpus)
+
     return matrix.toarray()
 
 

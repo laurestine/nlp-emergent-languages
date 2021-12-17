@@ -20,11 +20,10 @@ class TopographicSimilarity():
         self.meaning_metric = meaning_metric
 
     def measure(self, meanings: List[str], messages: List[str]) -> float:
-        mean = [[ord(c) for c in w] for w in meanings]
         mess = transform_corpus(messages)
 
         distance_messages = pdist(mess,self.message_metric)
-        distance_meaning = pdist(mean,self.meaning_metric)
+        distance_meaning = pdist(meanings,self.meaning_metric)
 
         topsim = spearmanr(distance_meaning,
                            distance_messages, nan_policy="raise").correlation
