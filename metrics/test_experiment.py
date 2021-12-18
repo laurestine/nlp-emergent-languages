@@ -1,8 +1,13 @@
 import string
-
 import random
-
 import editdistance  # Levenshtein distance
+import nltk
+from nltk.tokenize import word_tokenize
+
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 
 from scipy.spatial.distance import hamming
 
@@ -122,7 +127,8 @@ print("Topsim - rotation : {} \n".format(topsim_rot)) # -0.06640517470966958
 Pos
 """
 pos_class = PositionalDisentanglement(max_message_length=4, num_concept_slots=2)
-pos = pos_class.measure(negative_sentence_meaning, negative_sentence_input)
+token_messages = [word_tokenize(sentence) for sentence in negative_sentence_input]
+pos = pos_class.measure(negative_sentence_meaning, token_messages)
 print("Pos: {} \n".format(pos)) # 0.999999999999999
 
 

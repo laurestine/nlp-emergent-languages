@@ -40,6 +40,13 @@ def get_meaning(data,colunm: str, vocabulary: List[str] = []):
 
     return final_meanings
 
+def add_item_in_list(list_: List[str], item: str, list_length: int):
+    if len(list_) < list_length:
+        list_.append(item)
+        return add_item_in_list(list_, item, list_length)
+    else:
+        return list_
+
 
 def compute_entropy(symbols: List[str]) -> float:
     """

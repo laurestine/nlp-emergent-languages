@@ -1,16 +1,9 @@
 import numpy as np
 
-import nltk
-from nltk.tokenize import word_tokenize
-
 from typing import List
 
 from utils import compute_entropy, compute_mutual_information
 
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
 
 """
 Adapted from
@@ -24,10 +17,9 @@ class PositionalDisentanglement():
         self.num_concept_slots = num_concept_slots
         self.permutation_invariant = False
 
-    def measure(self, meanings: List[str], messages: List[str]) -> float:
+    def measure(self, meanings: List[str], token_messages: List[List[str]]) -> float:
         disentanglement_scores = []
         non_constant_positions = 0
-        token_messages = [word_tokenize(setence) for setence in messages]
 
         for j in range(self.max_message_length):
             symbols_j = [mean[j] for mean in meanings]
