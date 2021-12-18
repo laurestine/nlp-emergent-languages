@@ -18,18 +18,27 @@ def transform_corpus(corpus: List[str], vocabulary: List[str] = []):
     return matrix.toarray()
 
 
-def get_meaning(data,colunm: str):
+def get_meaning(data,colunm: str, vocabulary: List[str] = []):
     meaning_col = data[colunm].copy()
     meaning_separeted = meaning_col.apply(lambda x: x.split(';'))
     
-    all_meanings = [item for sublist in meaning_separeted for item in sublist]
-    vocabulary = list(set(all_meanings))
-
-    meanings_final = []
-    for meaning_list in meaning_separeted:
-        meanings_final.append([vocabulary.index(item) for item in meaning_list])
+    if not vocabulary:
+        all_meanings = [item for sublist in meaning_separeted for item in sublist]
+        vocabulary = list(set(all_meanings))
     
-    return meanings_final
+    n_meanings = float('-inf')
+    for meaning_list in meaning_separeted:
+        n_meanings = n_meanings if n_meanings > len(meaning_list) else len(meaning_list)
+
+
+    final_meanings = []
+    for meaning_list in meaning_separeted:
+        aux_meaning = np.zeros(n_meanings)
+        for i in range(len(meaning_list)):
+            aux_meaning[i] = vocabulary.index(meaning_list[i])+1
+        final_meanings.append(aux_meaning)
+
+    return final_meanings
 
 
 def compute_entropy(symbols: List[str]) -> float:
