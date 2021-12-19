@@ -3,3 +3,6 @@ scipy
 numpy
 scikit-learn
 nltk
+soundfile
+csv
+math
